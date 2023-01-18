@@ -12,7 +12,7 @@ from django.views.generic import View
 
 # Blog app imports
 from blog.token import account_activation_token
-from blog.forms.account.register_forms import UsrRegistrationForm
+from blog.forms.account.register_forms import UserRegisterForm
 
 
 class UserRegisterView(View):
@@ -28,7 +28,7 @@ class UserRegisterView(View):
         return render(request, 'account/account_activation_sent.html')
 
     def post(self, request, *args, **kwargs):
-        register_form = UsrRegistrationForm(request.POST)
+        register_form = UserRegisterForm(request.POST)
 
         if register_form.is_valid():
             user = register_form.save(commit=False)
