@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,6 +38,19 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'blog.apps.BlogConfig',
+
+    # installed app
+    'six'
+
+    'django_filters',
+    'rest_framework',
+    'taggit',
+    'ckeditor',
+    'ckeditor_uploader',
+    'crispy_forms',
+
 ]
 
 MIDDLEWARE = [
@@ -117,7 +131,51 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "blog/static"),]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_FINDERS = [
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+]
+
+# Media files (User uploaded images)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# CKEditor Settings
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+CKEDITOR_IMAGE_BACKEND = "pillow"
+
+CKEDITOR_CONFIGS = {
+    'default':
+    {'toolbar': 'full',
+     'width': 'auto',
+     'extraPlugins': ','.join([
+         'codesnippet',
+         'youtube'
+     ]),
+     },
+}
+
+
+# Account Settings
+LOGIN_URL = '/account/login/'
+LOGIN_REDIRECT_URL = '/author/dashboard/'
+LOGOUT_REDIRECT_URL = '/account/logout/'
+
+# Email Settings (Development)
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Email Settings (Production)
+EMAIL_BACKEND = ''
+EMAIL_HOST = ''
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ""
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
