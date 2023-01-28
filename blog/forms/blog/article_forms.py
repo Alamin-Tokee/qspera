@@ -130,7 +130,7 @@ class ArticleUpdateForm(forms.ModelForm):
                 "title": "Select Status"
             }),
             'body': forms.CharField(widget=CKEditorWidget(config_name="default", attrs={
-                "rows": 5, "cols": 20.
+                "rows": 5, "cols": 20,
                 'id': 'content',
                 'name': 'article_content',
                 'class': 'form-control',
