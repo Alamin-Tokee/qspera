@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 
 
 # Blog app imports
-from blog.forms.dashboard.author_forms import (
+from blog.forms.dashboard.author.author_forms import (
     UserUpdateForm, ProfileUpdateForm)
 
 
